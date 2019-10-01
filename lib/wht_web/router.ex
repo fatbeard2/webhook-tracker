@@ -17,6 +17,7 @@ defmodule WhtWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    resources "/webhooks", WebhookController, only: [:create, :show]
   end
 
   # Other scopes may use custom stacks.

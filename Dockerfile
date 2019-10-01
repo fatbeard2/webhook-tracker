@@ -1,6 +1,6 @@
-FROM elixir:1.9.1-slim
+FROM elixir:1.9.1
 
-RUN apt-get update && apt-get install -y wget inotify-tools
+RUN apt-get update && apt-get install -y inotify-tools
 RUN wget https://deb.nodesource.com/setup_10.x -O nodesource_setup.sh
 RUN bash nodesource_setup.sh
 RUN apt-get -y install nodejs
