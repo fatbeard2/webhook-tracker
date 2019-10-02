@@ -7,7 +7,14 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
 config :wht, WhtWeb.Endpoint,
-  http: [port: 4000],
+  http: [
+    port: 4000,
+    protocol_options: [
+      # For debugging purposes within scope of web request
+      inactivity_timeout: :infinity,
+      idle_timeout: :infinity
+    ]
+  ],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,

@@ -19,8 +19,15 @@ docker run --rm -it -v "$PWD":/wht -p 4000:4000 webhook-tracker mix phx.server
 docker run --rm -it -v "$PWD":/wht webhook-tracker bash
 ```
 
+## Documentation
 
-### Observer debugging
+```
+docker run --rm -v "$PWD":/wht webhook-tracker mix docs
+> Docs successfully generated.
+> View them at "doc/index.html".
+```
+
+## Observer debugging
 
 ```
 # run in X11 console - https://github.com/c0b/docker-elixir/issues/77#issuecomment-408586728

@@ -9,6 +9,7 @@ defmodule Wht.WebhookBucket do
     Agent.get(bucket, &(&1))
   end
 
+  @spec add_request(pid, Wht.RequestLog.t) :: atom
   def add_request(bucket, request) do
     Agent.cast(bucket, fn { id, requests } -> { id, [request | requests] } end)
   end

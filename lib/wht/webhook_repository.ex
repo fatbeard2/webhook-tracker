@@ -10,9 +10,11 @@ defmodule Wht.WebhookRepository do
     get_bucket_pid(id) |> Wht.WebhookBucket.get_bucket_state
   end
 
-  def add_request_log(id, conn) do
+  @spec add_request_log(String.t, Plug.Conn.t) :: atom
+  def add_request_log(id, %Plug.Conn{} = conn) do
+    request_log = Wht.RequestLogBuilder.build(conn)
     get_bucket_pid(id)
-    |> Wht.WebhookBucket.add_request(conn)
+    |> Wht.WebhookBucket.add_request(request_log)
   end
 
   defp get_bucket_pid(id) do
