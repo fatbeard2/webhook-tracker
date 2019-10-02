@@ -1,8 +1,8 @@
 defmodule Wht.WebhookBucket do
   use Agent, restart: :temporary
 
-  def start_link(id) do
-    Agent.start_link(fn -> { id, [] } end)
+  def start_link({ id, name }) do
+    Agent.start_link(fn -> { id, [] } end, name: name)
   end
 
   def get_bucket_state(bucket) do

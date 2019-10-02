@@ -1,3 +1,3 @@
 <div class="section generate-link-section">
-  <%= button("Generate a callback url", to: Routes.webhook_path(@conn, :create), method: "post", class: "button") %>
+  <%= button("Generate a callback url", to: Routes.request_bucket_path(@conn, :create), method: "post", class: "button") %>
 </div>

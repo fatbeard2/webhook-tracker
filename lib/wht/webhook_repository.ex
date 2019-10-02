@@ -6,15 +6,16 @@ defmodule Wht.WebhookRepository do
     |> get_bucket_state()
   end
 
-  def get_bucket_state({ :ok, bucket_pid }) do
-    Wht.WebhookBucket.get_bucket_state(bucket_pid)
-  end
-
   def get_bucket_state(id) do
-    get_bucket_state({ :ok, get_bucket_pid(id) })
+    get_bucket_pid(id) |> Wht.WebhookBucket.get_bucket_state
   end
 
-  def get_bucket_pid(id) do
+  def add_request_log(id, conn) do
+    get_bucket_pid(id)
+    |> Wht.WebhookBucket.add_request(conn)
+  end
+
+  defp get_bucket_pid(id) do
     case Registry.lookup(Wht.WebhookRegistry, id) do
       [{ pid, _ }] -> pid
       _ -> nil
@@ -25,12 +26,12 @@ defmodule Wht.WebhookRepository do
     { :via, Registry, { Wht.WebhookRegistry, id }}
   end
 
-  defp spawn_bucket_process(name_tuple) do
-    DynamicSupervisor.start_child(Wht.WebhookSupervisor, bucket_child_spec(name_tuple))
+  defp spawn_bucket_process(name_tuple = { :via, _, { _, id } }) do
+    { :ok, _ } = DynamicSupervisor.start_child(Wht.WebhookSupervisor, bucket_child_spec(id, name_tuple))
+    id
   end
 
-  defp bucket_child_spec(name_tuple = { _, _, { _, id }}) do
-    Wht.WebhookBucket.child_spec(id)
-    |> Map.put(:name, name_tuple)
+  defp bucket_child_spec(id, name_tuple) do
+    Wht.WebhookBucket.child_spec({ id, name_tuple })
   end
 end

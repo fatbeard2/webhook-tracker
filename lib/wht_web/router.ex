@@ -17,7 +17,11 @@ defmodule WhtWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    resources "/webhooks", WebhookController, only: [:create, :show]
+    resources "/request_buckets", RequestBucketController, only: [:create, :show]
+  end
+
+  scope "/webhooks", WhtWeb do
+    match :*, "/:id", WebhookController, :track
   end
 
   # Other scopes may use custom stacks.
