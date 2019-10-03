@@ -8,9 +8,9 @@ defmodule Wht.Application do
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
-      { Registry, keys: :unique, name: Wht.WebhookRegistry },
-      { DynamicSupervisor, name: Wht.WebhookSupervisor, strategy: :one_for_one },
-      { WhtWeb.Endpoint, {} }
+      {Registry, keys: :unique, name: Wht.WebhookRegistry},
+      {DynamicSupervisor, name: Wht.WebhookSupervisor, strategy: :one_for_one},
+      {WhtWeb.Endpoint, {}}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

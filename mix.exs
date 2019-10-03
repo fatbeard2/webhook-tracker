@@ -14,7 +14,7 @@ defmodule Wht.MixProject do
       # Docs
       name: "Webhook tracker",
       source_url: "https://github.com/fatbeard2/webhook-tracker",
-      homepage_url: "https://github.com/fatbeard2/webhook-tracker",
+      homepage_url: "https://github.com/fatbeard2/webhook-tracker"
     ]
   end
 
@@ -44,8 +44,8 @@ defmodule Wht.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:elixir_uuid, "~> 1.2" },
-      {:ex_doc, "~> 0.21", only: :dev, runtime: false},
+      {:elixir_uuid, "~> 1.2"},
+      {:ex_doc, "~> 0.21", only: :dev, runtime: false}
     ]
   end
 end

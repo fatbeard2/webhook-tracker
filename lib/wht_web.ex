@@ -23,6 +23,7 @@ defmodule WhtWeb do
 
       import Plug.Conn
       import WhtWeb.Gettext
+      import WhtWeb.Controller.Helpers
       alias WhtWeb.Router.Helpers, as: Routes
     end
   end

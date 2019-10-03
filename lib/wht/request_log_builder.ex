@@ -1,14 +1,14 @@
 defmodule Wht.RequestLogBuilder do
   @moduledoc """
-    This module is used to build `%Wht.RequestLog{}` structs
+    This module is used to build `Wht.RequestLog` structs
   """
 
   @doc """
-    Builds `%Wht.RequestLog{}` from `%Plug.Conn{}`
+    Builds `Wht.RequestLog` from `Plug.Conn`
 
-    Captures some fields from `%Plug.Conn{}` struct
-    and builds a `%Wht.RequestLog{}` struct that will be later stored in a bucket.
-    There is too much information in `%Plug.Conn{}` so we only capture fields we need
+    Captures some fields from `Plug.Conn` struct
+    and builds a `Wht.RequestLog` struct that will be later stored in a bucket.
+    There is too much information in `Plug.Conn` so we only capture fields we need
 
     Examples:
 
@@ -24,7 +24,8 @@ defmodule Wht.RequestLogBuilder do
         request_id: "request_id"
       }
   """
-  @spec build(Plug.Conn.t) :: Wht.RequestLog.t
+
+  @spec build(Plug.Conn.t()) :: Wht.RequestLog.t()
   def build(%Plug.Conn{} = conn) do
     %Wht.RequestLog{
       method: conn.method,
